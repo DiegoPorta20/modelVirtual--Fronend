@@ -23,6 +23,9 @@ import {MatMenuModule} from "@angular/material/menu";
 import { EditPersonalDataComponent } from './components/edit-personal-data/edit-personal-data.component';
 import { AddedFavoritesDialogComponent } from './components/added-favorites-dialog/added-favorites-dialog.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import {ProductsComponent} from "./components/products/products.component";
+import {ProductDetailsComponent} from "./components/product-details/product-details.component";
+
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -31,6 +34,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'account', component: AccountComponent},
   { path: 'account/edit-data', component: EditPersonalDataComponent},
+  {path:'products/product-details/:id',component:ProductDetailsComponent},
   { path: 'favorites', component: FavoritesComponent}
 ];
 
@@ -45,6 +49,11 @@ const routes: Routes = [
     AccountComponent,
     EditPersonalDataComponent,
     AddedFavoritesDialogComponent,
+    ProductsComponent,
+
+
+    ProductDetailsComponent,
+
     FavoritesComponent
   ],
   imports: [
