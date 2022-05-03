@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Product} from "../../interfaces/product.interface";
 import {ProductService} from "../../services/product.service";
-import { ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-product-details',
@@ -11,23 +12,55 @@ import { catchError } from 'rxjs/operators';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  id:number |undefined;
-  ProductDetails: Product | undefined;
-  product:Product|undefined;
+  productId;
+  ProductDetails$: Observable<Product> | undefined;
+
 
   constructor(
-    private productService:ProductService,
-    private actRoute:ActivatedRoute) {
-
+    private route:ActivatedRoute,
+    private productService:ProductService
+    ){
+    this.productId=this.route.snapshot.paramMap.get('id');
   }
+  ngOnInit():void {
+    this.route.paramMap.subscribe(
+      params => {
+        // @ts-ignore
+        this.productId= +params.get('id');
+        this.getProductsDetails();
+      }
+    );
 
-  ngOnInit():void  {
-    this.id = this.actRoute.snapshot.params['id'];
-    if(this.id!=undefined){
-      this.productService.getProductById(this.id).subscribe(resp=>this.product=resp);
+
     }
 
+    //this.productid=this.activerouter.snapshot.paramMap.get('id');
+    //this.productid = this.activerouter.snapshot.params(['id']);
+    //console.log(id);
 
+    /*this.activerouter.params.subscribe(
+      (params: Params) => {
+        this.productid = +params["id"];
+        console.log(this.productid);
+      }
+    );*/
+
+
+      //this.productService.getProductById(this.productid).subscribe(resp=>this.product=resp);
+
+    getProductsDetails(){
+      // @ts-ignore
+      // @ts-ignore
+      this.ProductDetails$=this.productService.getProductById(this.productId)
+        .pipe(// @ts-ignore
+          catchError(error =>{
+            console.log('Error:',error);
+            return EMPTY;
+          })
+        );
+    }
   }
 
-}
+
+
+

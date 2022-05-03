@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { shareReplay, map } from 'rxjs/operators';
 import {Product} from "../interfaces/product.interface";
 import {Observable} from "rxjs";
@@ -9,8 +9,12 @@ import {Observable} from "rxjs";
 })
 export class ProductService {
   apiURL='http://localhost:3000/products';
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  }
 
   constructor(private  http: HttpClient) { }
+  products$=this.getProducts().pipe(shareReplay(1));
 
 
   getProducts():Observable<Product[]>{
@@ -18,7 +22,7 @@ export class ProductService {
   }
 
 
-  getProductById(id:number): Observable<Product>{
-    return this.http.get<Product>(`${this.apiURL}/${id}`);
+  getProductById(id:number) {
+    return this.products$.pipe(map(product=>product.find(p=>p.id===id)));//(`${this.apiURL}?id=${id}`,this.httpOptions);
   }
 }
