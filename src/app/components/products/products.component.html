@@ -1,13 +1,18 @@
-<div *ngFor="let data of dataSource.data">
-  <a href="product-details/{{data.id}}}">
+<app-nav-bar></app-nav-bar>
+<mat-grid-list cols="2">
+  <mat-grid-tile *ngFor="let data of dataSource.data" [colspan]="2" [rowspan]="2">
     <mat-card class="example-card">
       <mat-card-header>
-        <mat-card-subtitle>{{data.name}}</mat-card-subtitle>
+        <strong><mat-card-subtitle>{{data.name}}</mat-card-subtitle></strong>
+        <mat-icon>favorite_border</mat-icon>
       </mat-card-header>
-      <img mat-card-image src="{{data.image}}" alt="Photo of a Shiba Inu">
+
+      <a href="product-details/{{data.id}}">
+        <img mat-card-image src="{{data.image}}" alt="Photo of a Shiba Inu">
+      </a>
       <mat-card-content>
         <p>{{data.price}}</p>
       </mat-card-content>
     </mat-card>
-  </a>
-</div>
+  </mat-grid-tile>
+</mat-grid-list>

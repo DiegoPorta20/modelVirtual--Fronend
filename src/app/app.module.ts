@@ -26,6 +26,7 @@ import {ProductsComponent} from "./components/products/products.component";
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 import {HttpClientModule} from "@angular/common/http";
 import {MatCardModule} from "@angular/material/card";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -73,7 +74,8 @@ const routes: Routes = [
     FormsModule,
     MatCardModule,
     HttpClientModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
