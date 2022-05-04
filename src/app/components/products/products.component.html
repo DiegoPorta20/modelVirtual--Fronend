@@ -1,0 +1,13 @@
+<div *ngFor="let data of dataSource.data">
+  <a href="product-details/{{data.id}}}">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-subtitle>{{data.name}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="{{data.image}}" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>{{data.price}}</p>
+      </mat-card-content>
+    </mat-card>
+  </a>
+</div>

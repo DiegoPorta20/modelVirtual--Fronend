@@ -1,0 +1,8 @@
+.example-card{
+  width: 150px;
+}
+.example-card img{
+  width: 100%;
+  margin: auto;
+  height: 200px;
+}
